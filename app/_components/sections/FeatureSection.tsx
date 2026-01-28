@@ -7,9 +7,9 @@ export function FeatureSection() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
 
           <div>
-            <h2 className="text-3xl font-bold text-[#2D74B2] mb-6">
-              Excelência em Atendimento e Hospitalidade
-            </h2>
+           <h2 className="text-[26px] sm:text-3xl font-bold text-[#2D74B2] mb-6 leading-tight tracking-tight text-center lg:text-left">
+  Excelência em Atendimento e Hospitalidade
+</h2>
 
             <p className="text-gray-600 text-lg mb-6 leading-relaxed">
               A UNICON – Universidade Corporativa de Concierges é uma instituição dedicada
@@ -40,12 +40,13 @@ export function FeatureSection() {
           </div>
 
           <div className="relative">
-            <div className="absolute -inset-4 bg-[#B00000]/20 rounded-2xl transform rotate-3" />
-            <img
-              src="https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?auto=format&fit=crop&q=80&w=1400"
-              alt="Atendimento e Hospitalidade de Excelência"
-              className="relative rounded-xl shadow-lg w-full"
-            />
+            <div className="absolute -inset-2 lg:-inset-4 bg-[#B00000]/20 rounded-2xl transform rotate-3" />
+
+<img
+  src="https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?auto=format&fit=crop&q=80&w=1400"
+  alt="Atendimento e Hospitalidade de Excelência"
+  className="relative rounded-xl shadow-lg w-full max-w-full"
+ />
           </div>
 
         </div>

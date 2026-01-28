@@ -34,7 +34,7 @@ export function HeroSection() {
               Inscrições Abertas 2026
             </Badge>
 
-            <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
+           <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6 text-justify lg:text-left">
               Universidade de Concierges <br />
               
             </h1>
