@@ -15,13 +15,13 @@ export function Logo({ className, light = false }: LogoProps) {
       )}
     >
       <Image
-        src="/logo.png"
-        alt="UNICON"
-        width={202}
-        height={202}
-        className="object-contain"
-        priority
-      />
+  src="/logo.png"
+  alt="UNICON"
+  width={202}
+  height={12}
+  className="w-[202px] sm:w-[202px] h-auto object-contain"
+  priority
+/>
 
       
     </div>
