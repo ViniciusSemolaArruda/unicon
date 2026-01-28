@@ -2,9 +2,10 @@ import { PublicHeader } from "@/app/_components/PublicHeader"
 import { HeroSection } from "@/app/_components/sections/HeroSection"
 import { FeatureSection } from "@/app/_components/sections/FeatureSection"
 import { CoursesSection } from "@/app/_components/sections/CoursesSection"
-import { TestimonialsSection } from "@/app/_components/sections/TestimonialsSection"
+//import { TestimonialsSection } from "@/app/_components/sections/TestimonialsSection"
 import { HomeFooter } from "@/app/_components/HomeFooter"
 import { ConciergeStatsSection } from "./_components/sections/ConciergeStatsSection"
+import { PillarsSection } from "./_components/sections/PillarsSection"
 
 export default function HomePage() {
   return (
@@ -14,8 +15,8 @@ export default function HomePage() {
       <FeatureSection />
       <ConciergeStatsSection />
       <CoursesSection />
+      <PillarsSection />
       
-      <TestimonialsSection />
       <HomeFooter />
     </main>
   )
