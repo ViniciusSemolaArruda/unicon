@@ -1,4 +1,4 @@
-import { StudentCourses } from "@/app/portal/student/student/StudentCourses"
+import StudentCourses from "../views/StudentCourses"
 export default function Page() {
   return <StudentCourses />
 }

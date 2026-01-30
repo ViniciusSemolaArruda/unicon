@@ -1,10 +1,4 @@
-import { Card } from "@/app/_components/ui/Card"
-
-export default function StudentMaterialsPage() {
-  return (
-    <Card className="p-6">
-      <h1 className="text-xl font-bold text-gray-900">Materiais</h1>
-      <p className="text-gray-600 mt-2">Em breve: lista de PDFs, apostilas e anexos por disciplina.</p>
-    </Card>
-  )
+import StudentMaterials from "../views/StudentMaterials"
+export default function Page() {
+  return <StudentMaterials />
 }
