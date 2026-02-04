@@ -27,17 +27,30 @@ export function PublicHeader() {
   }, [])
 
   function scrollToSection(id: SectionId) {
+    const doScroll = () => {
+      // topo
+      if (id === "top") {
+        window.scrollTo({ top: 0, behavior: "smooth" })
+        return
+      }
+
+      // seção
+      const el = document.getElementById(id)
+      if (!el) return
+
+      // offset do header sticky (ajuste se precisar)
+      const headerOffset = 88
+      const top = el.getBoundingClientRect().top + window.scrollY - headerOffset
+      window.scrollTo({ top, behavior: "smooth" })
+    }
+
+    // fecha menu mobile antes de rolar
     setOpen(false)
 
-    if (id === "top") {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-      return
-    }
-
-    const el = document.getElementById(id)
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" })
-    }
+    // ✅ no mobile: espera a animação do menu fechar para não travar o scroll
+    requestAnimationFrame(() => {
+      setTimeout(doScroll, 220)
+    })
   }
 
   return (
@@ -82,18 +95,17 @@ export function PublicHeader() {
 
             {/* ✅ INSCRREVA-SE DESTACADO */}
             <Link
-  href="/inscreva-se"
-  className="
-    px-4 py-2 rounded-full
-    bg-[#FC0000]/10 text-[#FC0000]
-    font-semibold
-    hover:bg-[#FC0000] hover:text-white
-    transition-colors
-  "
->
-  Inscreva-se
-</Link>
-
+              href="/inscreva-se"
+              className="
+                px-4 py-2 rounded-full
+                bg-[#FC0000]/10 text-[#FC0000]
+                font-semibold
+                hover:bg-[#FC0000] hover:text-white
+                transition-colors
+              "
+            >
+              Inscreva-se
+            </Link>
           </nav>
 
           {/* LOGIN DESKTOP */}
@@ -111,6 +123,7 @@ export function PublicHeader() {
                 onClick={() => setLoginOpen((v) => !v)}
                 aria-haspopup="menu"
                 aria-expanded={loginOpen}
+                type="button"
               >
                 <LogIn size={18} />
                 Login
@@ -134,19 +147,22 @@ export function PublicHeader() {
                       rounded-xl border border-gray-100 bg-white shadow-lg
                       overflow-hidden
                     "
+                    role="menu"
                   >
                     <Link
                       href="/login/student"
-                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2D74B2]"
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2D74B2] transition-colors"
                       onClick={() => setLoginOpen(false)}
+                      role="menuitem"
                     >
                       Área do Aluno
                     </Link>
 
                     <Link
                       href="/login/professor"
-                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2D74B2]"
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2D74B2] transition-colors"
                       onClick={() => setLoginOpen(false)}
+                      role="menuitem"
                     >
                       Área do Professor
                     </Link>
@@ -158,6 +174,7 @@ export function PublicHeader() {
 
           {/* BOTÃO MOBILE */}
           <button
+            type="button"
             className="md:hidden p-2 text-gray-600"
             onClick={() => setOpen((v) => !v)}
             aria-label="Abrir menu"
@@ -167,7 +184,7 @@ export function PublicHeader() {
         </div>
       </div>
 
-      {/* MENU MOBILE */}
+      {/* MENU MOBILE (CENTRALIZADO) */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -176,33 +193,67 @@ export function PublicHeader() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-white border-b border-gray-100 overflow-hidden"
           >
-            <div className="px-4 py-4 space-y-4">
-              <div className="flex flex-col gap-4 text-gray-600 font-medium">
-                <button onClick={() => scrollToSection("top")}>Início</button>
-                <button onClick={() => scrollToSection("about")}>Sobre</button>
-                <button onClick={() => scrollToSection("courses")}>Cursos</button>
-                <button onClick={() => scrollToSection("pilares")}>Pilares</button>
+            <div className="px-4 py-5">
+              <div className="flex flex-col items-center text-center gap-4 text-gray-700 font-medium">
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("top")}
+                  className="w-full"
+                >
+                  Início
+                </button>
 
-                {/* INSCRREVA-SE MOBILE */}
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("about")}
+                  className="w-full"
+                >
+                  Sobre
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("courses")}
+                  className="w-full"
+                >
+                  Cursos
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("pilares")}
+                  className="w-full"
+                >
+                  Pilares
+                </button>
+
+                {/* Inscreva-se (vai pra página) */}
                 <Link
-  href="/inscreva-se"
-  onClick={() => setOpen(false)}
-  className="text-[#FC0000] font-semibold"
->
-  Inscreva-se
-</Link>
+                  href="/inscreva-se"
+                  onClick={() => setOpen(false)}
+                  className="
+                    mt-2 inline-flex justify-center w-full
+                    px-4 py-2 rounded-full
+                    bg-[#FC0000]/10 text-[#FC0000]
+                    font-semibold
+                    hover:bg-[#FC0000] hover:text-white
+                    transition-colors
+                  "
+                >
+                  Inscreva-se
+                </Link>
               </div>
 
-              <div className="h-px bg-gray-100 my-2" />
+              <div className="h-px bg-gray-100 my-5" />
 
-              <div className="flex flex-col gap-3">
-                <Link href="/login/student" onClick={() => setOpen(false)}>
+              <div className="flex flex-col items-center gap-3">
+                <Link href="/login/student" onClick={() => setOpen(false)} className="w-full">
                   <Button variant="outline" fullWidth>
                     Área do Aluno
                   </Button>
                 </Link>
 
-                <Link href="/login/professor" onClick={() => setOpen(false)}>
+                <Link href="/login/professor" onClick={() => setOpen(false)} className="w-full">
                   <Button variant="outline" fullWidth>
                     Área do Professor
                   </Button>
