@@ -7,6 +7,7 @@ import { HomeFooter } from "@/app/_components/HomeFooter"
 import { ConciergeStatsSection } from "./_components/sections/ConciergeStatsSection"
 import { PillarsSection } from "./_components/sections/PillarsSection"
 
+
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white">

@@ -10,10 +10,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   // ❌ não mostrar no portal (aluno/professor/admin)
   const hideWhatsapp =
-    pathname.startsWith("/portal") ||
-    pathname.startsWith("/portal/student") ||
-    pathname.startsWith("/portal/professor") ||
-    pathname.startsWith("/portal/admin")
+  pathname.startsWith("/portal") ||
+  pathname.startsWith("/portal/student") ||
+  pathname.startsWith("/portal/professor") ||
+  pathname.startsWith("/portal/admin") ||
+  pathname.startsWith("/inscreva-se")
+
+
 
   return (
     <html lang="pt-br">

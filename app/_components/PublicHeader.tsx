@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "motion/react"
 import { Button } from "@/app/_components/ui/Button"
 import { Logo } from "@/app/_components/Logo"
 
-type SectionId = "top" | "about" | "courses" | "pilares" | "contact"
+type SectionId = "top" | "about" | "courses" | "pilares" | "signup"
 
 export function PublicHeader() {
   const [open, setOpen] = useState(false)
@@ -27,16 +27,13 @@ export function PublicHeader() {
   }, [])
 
   function scrollToSection(id: SectionId) {
-    // fecha menu mobile sempre
     setOpen(false)
 
-    // topo
     if (id === "top") {
       window.scrollTo({ top: 0, behavior: "smooth" })
       return
     }
 
-    // seção
     const el = document.getElementById(id)
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" })
@@ -49,7 +46,8 @@ export function PublicHeader() {
         <div className="flex justify-between items-center h-20">
           <Logo />
 
-          <nav className="hidden md:flex gap-8 text-gray-600 font-medium">
+          {/* MENU DESKTOP */}
+          <nav className="hidden md:flex gap-8 text-gray-600 font-medium items-center">
             <button
               type="button"
               onClick={() => scrollToSection("top")}
@@ -82,16 +80,23 @@ export function PublicHeader() {
               Pilares
             </button>
 
-            <button
-              type="button"
-              onClick={() => scrollToSection("contact")}
-              className="hover:text-[#2D74B2] transition-colors"
-            >
-              Contato
-            </button>
+            {/* ✅ INSCRREVA-SE DESTACADO */}
+            <Link
+  href="/inscreva-se"
+  className="
+    px-4 py-2 rounded-full
+    bg-[#FC0000]/10 text-[#FC0000]
+    font-semibold
+    hover:bg-[#FC0000] hover:text-white
+    transition-colors
+  "
+>
+  Inscreva-se
+</Link>
+
           </nav>
 
-          {/* Desktop: Login dropdown (hover + click) */}
+          {/* LOGIN DESKTOP */}
           <div className="hidden md:flex items-center gap-3">
             <div
               ref={loginRef}
@@ -115,7 +120,6 @@ export function PublicHeader() {
                 />
               </Button>
 
-              {/* “ponte” invisível pra não perder hover ao descer o mouse */}
               <div className="absolute left-0 right-0 top-full h-2" />
 
               <AnimatePresence>
@@ -130,22 +134,19 @@ export function PublicHeader() {
                       rounded-xl border border-gray-100 bg-white shadow-lg
                       overflow-hidden
                     "
-                    role="menu"
                   >
                     <Link
                       href="/login/student"
-                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2D74B2] transition-colors"
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2D74B2]"
                       onClick={() => setLoginOpen(false)}
-                      role="menuitem"
                     >
                       Área do Aluno
                     </Link>
 
                     <Link
                       href="/login/professor"
-                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2D74B2] transition-colors"
+                      className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#2D74B2]"
                       onClick={() => setLoginOpen(false)}
-                      role="menuitem"
                     >
                       Área do Professor
                     </Link>
@@ -155,6 +156,7 @@ export function PublicHeader() {
             </div>
           </div>
 
+          {/* BOTÃO MOBILE */}
           <button
             className="md:hidden p-2 text-gray-600"
             onClick={() => setOpen((v) => !v)}
@@ -165,7 +167,7 @@ export function PublicHeader() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* MENU MOBILE */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -176,21 +178,19 @@ export function PublicHeader() {
           >
             <div className="px-4 py-4 space-y-4">
               <div className="flex flex-col gap-4 text-gray-600 font-medium">
-                <button type="button" onClick={() => scrollToSection("top")} className="text-left">
-                  Início
-                </button>
-                <button type="button" onClick={() => scrollToSection("about")} className="text-left">
-                  Sobre
-                </button>
-                <button type="button" onClick={() => scrollToSection("courses")} className="text-left">
-                  Cursos
-                </button>
-                <button type="button" onClick={() => scrollToSection("pilares")} className="text-left">
-                  Pilares
-                </button>
-                <button type="button" onClick={() => scrollToSection("contact")} className="text-left">
-                  Contato
-                </button>
+                <button onClick={() => scrollToSection("top")}>Início</button>
+                <button onClick={() => scrollToSection("about")}>Sobre</button>
+                <button onClick={() => scrollToSection("courses")}>Cursos</button>
+                <button onClick={() => scrollToSection("pilares")}>Pilares</button>
+
+                {/* INSCRREVA-SE MOBILE */}
+                <Link
+  href="/inscreva-se"
+  onClick={() => setOpen(false)}
+  className="text-[#FC0000] font-semibold"
+>
+  Inscreva-se
+</Link>
               </div>
 
               <div className="h-px bg-gray-100 my-2" />
