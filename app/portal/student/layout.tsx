@@ -15,6 +15,7 @@ import {
   MessageSquare,
   Menu,
   X,
+  Library,
 } from "lucide-react"
 import { STUDENT } from "./mock"
 
@@ -111,6 +112,13 @@ function SidebarContent({
           match="startsWith"
           onNavigate={onNavigate}
         />
+        <NavItem
+  href="/portal/student/library"
+  icon={Library}
+  label="Biblioteca Virtual"
+  match="startsWith"
+  onNavigate={onNavigate}
+/>
         <NavItem
           href="/portal/student/live"
           icon={Video}

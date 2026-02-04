@@ -7,6 +7,8 @@ import { AnimatePresence, motion } from "motion/react"
 import { Button } from "@/app/_components/ui/Button"
 import { Logo } from "@/app/_components/Logo"
 
+type SectionId = "top" | "about" | "courses" | "pilares" | "contact"
+
 export function PublicHeader() {
   const [open, setOpen] = useState(false)
 
@@ -24,6 +26,23 @@ export function PublicHeader() {
     return () => document.removeEventListener("mousedown", onDocMouseDown)
   }, [])
 
+  function scrollToSection(id: SectionId) {
+    // fecha menu mobile sempre
+    setOpen(false)
+
+    // topo
+    if (id === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+      return
+    }
+
+    // seção
+    const el = document.getElementById(id)
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,21 +50,45 @@ export function PublicHeader() {
           <Logo />
 
           <nav className="hidden md:flex gap-8 text-gray-600 font-medium">
-            <Link href="#inicio" className="hover:text-[#2D74B2] transition-colors">
+            <button
+              type="button"
+              onClick={() => scrollToSection("top")}
+              className="hover:text-[#2D74B2] transition-colors"
+            >
               Início
-            </Link>
-            <a href="#about" className="hover:text-[#2D74B2] transition-colors">
+            </button>
+
+            <button
+              type="button"
+              onClick={() => scrollToSection("about")}
+              className="hover:text-[#2D74B2] transition-colors"
+            >
               Sobre
-            </a>
-            <a href="#courses" className="hover:text-[#2D74B2] transition-colors">
+            </button>
+
+            <button
+              type="button"
+              onClick={() => scrollToSection("courses")}
+              className="hover:text-[#2D74B2] transition-colors"
+            >
               Cursos
-            </a>
-            <a href="#pilares" className="hover:text-[#2D74B2] transition-colors">
+            </button>
+
+            <button
+              type="button"
+              onClick={() => scrollToSection("pilares")}
+              className="hover:text-[#2D74B2] transition-colors"
+            >
               Pilares
-            </a>
-            <a href="#contact" className="hover:text-[#2D74B2] transition-colors">
+            </button>
+
+            <button
+              type="button"
+              onClick={() => scrollToSection("contact")}
+              className="hover:text-[#2D74B2] transition-colors"
+            >
               Contato
-            </a>
+            </button>
           </nav>
 
           {/* Desktop: Login dropdown (hover + click) */}
@@ -133,21 +176,21 @@ export function PublicHeader() {
           >
             <div className="px-4 py-4 space-y-4">
               <div className="flex flex-col gap-4 text-gray-600 font-medium">
-                <Link href="#inicio" onClick={() => setOpen(false)}>
+                <button type="button" onClick={() => scrollToSection("top")} className="text-left">
                   Início
-                </Link>
-                <a href="#about" onClick={() => setOpen(false)}>
+                </button>
+                <button type="button" onClick={() => scrollToSection("about")} className="text-left">
                   Sobre
-                </a>
-                <a href="#courses" onClick={() => setOpen(false)}>
+                </button>
+                <button type="button" onClick={() => scrollToSection("courses")} className="text-left">
                   Cursos
-                </a>
-                <a href="#pilares" onClick={() => setOpen(false)}>
+                </button>
+                <button type="button" onClick={() => scrollToSection("pilares")} className="text-left">
                   Pilares
-                </a>
-                <a href="#contact" onClick={() => setOpen(false)}>
+                </button>
+                <button type="button" onClick={() => scrollToSection("contact")} className="text-left">
                   Contato
-                </a>
+                </button>
               </div>
 
               <div className="h-px bg-gray-100 my-2" />
