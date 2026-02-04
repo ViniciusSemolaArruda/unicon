@@ -31,7 +31,7 @@ export function PublicHeader() {
           <Logo />
 
           <nav className="hidden md:flex gap-8 text-gray-600 font-medium">
-            <Link href="/" className="hover:text-[#2D74B2] transition-colors">
+            <Link href="#inicio" className="hover:text-[#2D74B2] transition-colors">
               Início
             </Link>
             <a href="#about" className="hover:text-[#2D74B2] transition-colors">
@@ -40,8 +40,8 @@ export function PublicHeader() {
             <a href="#courses" className="hover:text-[#2D74B2] transition-colors">
               Cursos
             </a>
-            <a href="#structure" className="hover:text-[#2D74B2] transition-colors">
-              Estrutura
+            <a href="#pilares" className="hover:text-[#2D74B2] transition-colors">
+              Pilares
             </a>
             <a href="#contact" className="hover:text-[#2D74B2] transition-colors">
               Contato
@@ -133,7 +133,7 @@ export function PublicHeader() {
           >
             <div className="px-4 py-4 space-y-4">
               <div className="flex flex-col gap-4 text-gray-600 font-medium">
-                <Link href="/" onClick={() => setOpen(false)}>
+                <Link href="#inicio" onClick={() => setOpen(false)}>
                   Início
                 </Link>
                 <a href="#about" onClick={() => setOpen(false)}>
@@ -142,8 +142,8 @@ export function PublicHeader() {
                 <a href="#courses" onClick={() => setOpen(false)}>
                   Cursos
                 </a>
-                <a href="#structure" onClick={() => setOpen(false)}>
-                  Estrutura
+                <a href="#pilares" onClick={() => setOpen(false)}>
+                  Pilares
                 </a>
                 <a href="#contact" onClick={() => setOpen(false)}>
                   Contato

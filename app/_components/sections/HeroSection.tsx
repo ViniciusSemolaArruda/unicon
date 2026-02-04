@@ -7,7 +7,7 @@ import { motion } from "motion/react"
 
 export function HeroSection() {
   return (
-    <section className="relative bg-[#2D74B2] text-white overflow-hidden py-24 lg:py-32">
+    <section id="inicio" className="relative bg-[#2D74B2] text-white overflow-hidden py-24 lg:py-32">
       
       {/* Background */}
       <div className="absolute inset-0 opacity-20">
