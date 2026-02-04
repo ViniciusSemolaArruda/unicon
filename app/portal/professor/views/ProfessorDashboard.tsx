@@ -1,10 +1,11 @@
-//app\portal\student\views\StudentDashboard.tsx
+// app/portal/professor/views/ProfessorDashboard.tsx
 "use client"
 
-import { Bell } from "lucide-react"
+import { Bell, ChevronRight } from "lucide-react"
+import Link from "next/link"
 import { Card } from "@/app/_components/ui/Card"
 import { Button } from "@/app/_components/ui/Button"
-import { KPI, CLASSES, NOTICES } from "../mock"
+import { KPI, TODAY_CLASSES, NOTICES, QUICK_ACTIONS } from "../mock"
 
 function toneClasses(tone: "blue" | "amber" | "green") {
   if (tone === "blue")
@@ -26,10 +27,9 @@ function toneClasses(tone: "blue" | "amber" | "green") {
   }
 }
 
-export default function StudentDashboard() {
+export default function ProfessorDashboard() {
   return (
     <div className="space-y-8">
-
       {/* KPIs */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {KPI.map((k) => {
@@ -47,7 +47,9 @@ export default function StudentDashboard() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-sm text-slate-500">{k.label}</p>
-                  <p className="text-4xl font-extrabold text-slate-900 mt-1">{k.value}</p>
+                  <p className="text-4xl font-extrabold text-slate-900 mt-1">
+                    {k.value}
+                  </p>
                   <p className="text-sm text-slate-500 mt-2">{k.helper}</p>
                 </div>
 
@@ -61,33 +63,44 @@ export default function StudentDashboard() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
-        {/* Próximas aulas */}
+        {/* Aulas de hoje */}
         <Card className="p-6 bg-white shadow-sm border rounded-2xl">
-          <h2 className="text-lg font-bold text-slate-900 mb-4">Próximas Aulas</h2>
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h2 className="text-lg font-bold text-slate-900">Aulas de Hoje</h2>
+              <p className="text-sm text-slate-500 mt-1">Turmas e horários do dia.</p>
+            </div>
 
-          <div className="space-y-3">
-            {CLASSES.map((c) => (
+            <Link href="/portal/professor/classes">
+              <Button
+                size="sm"
+                variant="outline"
+                className="rounded-xl border-[#2D74B2] text-[#2D74B2] hover:bg-[#2D74B2] hover:text-white"
+              >
+                Ver turmas
+                <ChevronRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
+
+          <div className="mt-4 space-y-3">
+            {TODAY_CLASSES.map((c) => (
               <div
                 key={c.id}
                 className="flex items-center justify-between gap-4 p-4 border rounded-2xl bg-white"
               >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-slate-100 grid place-items-center text-[#2D74B2] font-bold">
-                    {c.initials}
+                <div className="min-w-0">
+                  <div className="font-semibold text-slate-900 truncate">
+                    {c.course} — {c.classGroup}
                   </div>
-                  <div>
-                    <p className="font-semibold text-slate-900">{c.name}</p>
-                    <p className="text-sm text-slate-500">{c.time}</p>
+                  <div className="text-sm text-slate-500 mt-1">
+                    {c.time} • {c.room} • {c.students} alunos
                   </div>
                 </div>
 
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="rounded-xl border-[#2D74B2] text-[#2D74B2] hover:bg-[#2D74B2] hover:text-white"
-                >
-                  Entrar
-                </Button>
+                <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#FDBE00]/20 text-[#B88600] whitespace-nowrap">
+                  {c.status}
+                </span>
               </div>
             ))}
           </div>
@@ -113,6 +126,24 @@ export default function StudentDashboard() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="mt-5 grid sm:grid-cols-2 gap-3">
+            {QUICK_ACTIONS.map((a) => {
+              const Icon = a.icon
+              return (
+                <Link
+                  key={a.id}
+                  href={a.href}
+                  className="p-4 border rounded-2xl bg-white hover:bg-slate-50 transition flex items-center gap-3"
+                >
+                  <span className="w-10 h-10 rounded-xl bg-[#2D74B2]/10 grid place-items-center">
+                    <Icon className="w-5 h-5 text-[#2D74B2]" />
+                  </span>
+                  <div className="font-semibold text-slate-900">{a.label}</div>
+                </Link>
+              )
+            })}
           </div>
         </Card>
       </div>

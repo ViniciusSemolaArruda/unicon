@@ -1,3 +1,4 @@
+//app\portal\student\views\StudentCourses.tsx
 "use client"
 
 import { Card } from "@/app/_components/ui/Card"

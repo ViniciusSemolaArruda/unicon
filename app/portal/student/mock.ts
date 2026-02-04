@@ -1,3 +1,4 @@
+//app\portal\student\mock.ts
 import { BarChart3, BookOpen, Calendar } from "lucide-react"
 
 export const STUDENT = {

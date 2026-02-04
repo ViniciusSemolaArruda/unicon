@@ -1,10 +1,6 @@
-import { Card } from "@/app/_components/ui/Card"
+// app/portal/professor/page.tsx
+import ProfessorDashboard from "./views/ProfessorDashboard"
 
-export default function ProfessorPage() {
-  return (
-    <Card className="p-6">
-      <h1 className="text-xl font-bold text-gray-900">Dashboard do Professor</h1>
-      <p className="text-gray-600 mt-2">Em breve: turmas, lançamentos e materiais.</p>
-    </Card>
-  )
+export default function Page() {
+  return <ProfessorDashboard />
 }

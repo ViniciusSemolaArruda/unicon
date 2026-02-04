@@ -1,4 +1,4 @@
-//app\portal\student\layout.tsx
+// app/portal/professor/layout.tsx
 "use client"
 
 import Link from "next/link"
@@ -6,17 +6,15 @@ import React, { useEffect, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import {
   LayoutDashboard,
-  BookOpen,
-  BarChart3,
   ClipboardList,
-  Video,
+  BarChart3,
+  UploadCloud,
   Bell,
   LogOut,
-  MessageSquare,
   Menu,
   X,
 } from "lucide-react"
-import { STUDENT } from "./mock"
+import { PROFESSOR } from "./mock"
 
 function NavItem({
   href,
@@ -64,7 +62,6 @@ function SidebarContent({
 }) {
   return (
     <div className="h-full flex flex-col p-5">
-      {/* Brand (controlável) */}
       {showBrand && (
         <div className="flex items-center gap-3 px-2 py-2">
           <img
@@ -77,44 +74,30 @@ function SidebarContent({
 
       <div className={showBrand ? "mt-6 space-y-2" : "mt-2 space-y-2"}>
         <NavItem
-          href="/portal/student"
+          href="/portal/professor"
           icon={LayoutDashboard}
           label="Dashboard"
           match="exact"
           onNavigate={onNavigate}
         />
         <NavItem
-          href="/portal/student/courses"
-          icon={BookOpen}
-          label="Minhas Disciplinas"
+          href="/portal/professor/classes"
+          icon={ClipboardList}
+          label="Turmas e Aulas"
           match="startsWith"
           onNavigate={onNavigate}
         />
         <NavItem
-          href="/portal/student/grades"
+          href="/portal/professor/grades"
           icon={BarChart3}
           label="Notas e Frequência"
           match="startsWith"
           onNavigate={onNavigate}
         />
         <NavItem
-          href="/portal/student/materials"
-          icon={ClipboardList}
-          label="Materiais"
-          match="startsWith"
-          onNavigate={onNavigate}
-        />
-        <NavItem
-          href="/portal/student/doubts"
-          icon={MessageSquare}
-          label="Dúvidas"
-          match="startsWith"
-          onNavigate={onNavigate}
-        />
-        <NavItem
-          href="/portal/student/live"
-          icon={Video}
-          label="Aulas Online"
+          href="/portal/professor/upload"
+          icon={UploadCloud}
+          label="Upload de Materiais"
           match="startsWith"
           onNavigate={onNavigate}
         />
@@ -136,7 +119,7 @@ function SidebarContent({
   )
 }
 
-export default function StudentLayout({
+export default function ProfessorLayout({
   children,
 }: {
   children: React.ReactNode
@@ -151,7 +134,6 @@ export default function StudentLayout({
     router.push("/")
   }
 
-  // Fecha drawer se usuário apertar "voltar" no navegador
   useEffect(() => {
     const close = () => setMobileOpen(false)
     window.addEventListener("popstate", close)
@@ -169,16 +151,13 @@ export default function StudentLayout({
         {/* Drawer mobile */}
         {mobileOpen && (
           <div className="lg:hidden fixed inset-0 z-50">
-            {/* overlay */}
             <button
               type="button"
               aria-label="Fechar menu"
               onClick={() => setMobileOpen(false)}
               className="absolute inset-0 bg-black/40"
             />
-            {/* panel */}
             <div className="absolute left-0 top-0 h-full w-[85%] max-w-[320px] bg-[#204f79] text-white shadow-2xl">
-              {/* Header do drawer (logo única no mobile) */}
               <div className="flex items-center justify-between p-4">
                 <img
                   src="/logo.png"
@@ -195,7 +174,6 @@ export default function StudentLayout({
                 </button>
               </div>
 
-              {/* Conteúdo do menu (sem brand) */}
               <div className="px-1">
                 <SidebarContent
                   onLogout={handleLogout}
@@ -212,7 +190,6 @@ export default function StudentLayout({
           {/* Topbar */}
           <header className="h-16 bg-white border-b flex items-center justify-between px-4 sm:px-6 md:px-8">
             <div className="flex items-center gap-3 min-w-0">
-              {/* Mobile menu button */}
               <button
                 type="button"
                 onClick={() => setMobileOpen(true)}
@@ -223,7 +200,7 @@ export default function StudentLayout({
               </button>
 
               <h1 className="text-lg sm:text-xl font-bold text-slate-900 truncate">
-                Portal Do Aluno
+                Portal do Professor
               </h1>
             </div>
 
@@ -238,11 +215,11 @@ export default function StudentLayout({
 
               <div className="flex items-center gap-3">
                 <div className="hidden sm:block text-right leading-tight">
-                  <div className="text-sm font-semibold text-slate-900 truncate max-w-[180px]">
-                    {STUDENT.name}
+                  <div className="text-sm font-semibold text-slate-900 truncate max-w-[220px]">
+                    {PROFESSOR.name}
                   </div>
                   <div className="text-xs text-slate-500">
-                    Matrícula: {STUDENT.matricula}
+                    Matrícula: {PROFESSOR.matricula}
                   </div>
                 </div>
                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-200 border shrink-0" />
@@ -250,7 +227,6 @@ export default function StudentLayout({
             </div>
           </header>
 
-          {/* Content */}
           <div className="p-4 sm:p-6 md:p-8">{children}</div>
         </main>
       </div>
